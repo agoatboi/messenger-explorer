@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "public",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "paths": {
+      "@src/*": ["src/*"]
+    },
+  },
+  "exclude": ["node_modules", "**/node_modules/*"],
+  "include": ["./src/**/*", "./src/interfaces/*", "src/custom.d.ts"]
+}
