@@ -12,7 +12,7 @@ const defaultHeader = () => {
   const themeList = select('ThemeList', HeaderTheme, HeaderTheme.DEFAULT);
   const title = text('title', 'Thread Title');
 
-  return <Header useTheme={themeList} title={title} />;
+  return <Header useTheme={themeList} title={title} buttons={[]} />;
 };
 
 stories.add('default', defaultHeader);

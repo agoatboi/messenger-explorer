@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { useState } from 'react';
 import Thread from '@src/components/organisms/Thread';
 import { IMessage } from '@src/interfaces/MessageInterfaces';
@@ -6,6 +7,8 @@ import Message from '@src/components/molecules/Message';
 import { uid } from 'react-uid';
 import BackupDropper from '@src/components/atoms/BackupDropper';
 import Header from '@src/components/molecules/Header';
+import Button from '@src/components/atoms/Button';
+import SettingsSVGIcon from '@src/resources/icons/settings-24px.svg';
 
 function groupMessages(arr: IMessage[][], el: IMessage) {
   let newArr = arr;
@@ -39,7 +42,10 @@ function Main(): JSX.Element {
   });
   return (
     <div>
-      <Header title={threadObj.empty ? '' : threadObj.title} />
+      <Header
+        title={threadObj.empty ? '' : threadObj.title}
+        buttons={[<Button text="" key={uid(SettingsSVGIcon)} icon={SettingsSVGIcon} />]}
+      />
       {threadObj.empty && (
         <BackupDropper message="Drop your Conversation .json file here" onLoaded={setThreadObj} />
       )}

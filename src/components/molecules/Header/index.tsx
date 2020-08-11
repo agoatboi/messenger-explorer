@@ -13,12 +13,14 @@ type HeaderProps = {
   useTheme: string;
   children: React.ReactNode;
   title: string;
+  buttons: Array<React.ReactNode>;
 };
 
-function Header({ useTheme, children, title }: HeaderProps): JSX.Element {
+function Header({ useTheme, children, title, buttons }: HeaderProps): JSX.Element {
   return (
     <StyledHeader useTheme={useTheme}>
-      Messenger Explorer
+      {buttons}
+      <span>Messenger Explorer</span>
       {title && <span> - {title}</span>}
       {children}
     </StyledHeader>
@@ -28,7 +30,8 @@ function Header({ useTheme, children, title }: HeaderProps): JSX.Element {
 Header.defaultProps = {
   children: '',
   useTheme: HeaderTheme.DEFAULT,
-  thread_name: '',
+  title: '',
+  buttons: [],
 };
 
 export default Header;
