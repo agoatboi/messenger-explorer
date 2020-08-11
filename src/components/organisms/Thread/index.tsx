@@ -28,10 +28,9 @@ interface ThreadProps extends Thread {
   children: React.ReactNode;
 }
 
-function Thread({ useTheme, children, participants, title }: ThreadProps) {
+function Thread({ useTheme, children, participants, title }: ThreadProps): JSX.Element {
   return (
     <StyledThread useTheme={useTheme}>
-      <Title title={title} />
       <h3>List of Participants:</h3>
       <ul>
         {participants.map((participant) => (
@@ -46,6 +45,7 @@ function Thread({ useTheme, children, participants, title }: ThreadProps) {
 Thread.defaultProps = {
   children: '',
   useTheme: ThreadTheme.DEFAULT,
+  title: '',
 };
 
 export default Thread;

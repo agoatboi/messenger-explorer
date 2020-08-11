@@ -5,6 +5,7 @@ import MessageGroup from '@src/components/molecules/MessageGroup';
 import Message from '@src/components/molecules/Message';
 import { uid } from 'react-uid';
 import BackupDropper from '@src/components/atoms/BackupDropper';
+import Header from '@src/components/molecules/Header';
 
 function groupMessages(arr: IMessage[][], el: IMessage) {
   let newArr = arr;
@@ -38,7 +39,7 @@ function Main(): JSX.Element {
   });
   return (
     <div>
-      <h1>Messenger Explorer</h1>
+      <Header title={threadObj.empty ? '' : threadObj.title} />
       {threadObj.empty && (
         <BackupDropper message="Drop your Conversation .json file here" onLoaded={setThreadObj} />
       )}
@@ -47,7 +48,6 @@ function Main(): JSX.Element {
           thread_path={threadObj.thread_path}
           thread_type={threadObj.thread_type}
           participants={threadObj.participants}
-          title={threadObj.title}
         >
           {threadObj.messages
             .reduce(groupMessages, [])
