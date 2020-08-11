@@ -22,11 +22,9 @@ type MessageGroupProps = {
 
 function MessageGroup({ useTheme, children, sender_name, timestamp }: MessageGroupProps) {
   return (
-    <StyledMessageGroup useTheme={useTheme}>
+    <StyledMessageGroup className="message-group" useTheme={useTheme}>
       <ProfileName name={sender_name} />
-      <Separator />
-      {children}
-      <Separator />
+      <div>{children}</div>
       <Timestamp timestamp={timestamp} dateFormat="full" />
     </StyledMessageGroup>
   );

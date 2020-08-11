@@ -7,19 +7,49 @@ type themeOptions = {
 
 const baseStyle = () => {
   return css`
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    div.message {
+      padding: 6px 8px;
+      margin: 1px;
+    }
   `;
 };
 
 const MessageGroupTheme: themeOptions = {
-  DEFAULT: css`
-    justify-content: flex-start;
+  THEIRS: css`
+    div {
+      clear: both;
+      float: left;
+
+      div.message {
+        background: #f3f3f3;
+        color: black;
+        border-radius: 0em 0.75em 0.75em 0em;
+      }
+      div.message:first-of-type {
+        border-radius: 0.75em 0.75em 0.75em 0em;
+      }
+      div.message:last-of-type {
+        border-radius: 0em 0.75em 0.75em 0.75em;
+      }
+    }
   `,
-  RIGHT: css`
-    justify-content: flex-end;
+  OURS: css`
+    div {
+      clear: both;
+      float: right;
+
+      div.message {
+        background: blue;
+        color: white;
+        border-radius: 0.75em 0em 0em 0.75em;
+      }
+      div.message:first-of-type {
+        border-radius: 0.75em 0.75em 0em 0.75em;
+      }
+      div.message:last-of-type {
+        border-radius: 0.75em 0em 0.75em 0.75em;
+      }
+    }
   `,
 };
 

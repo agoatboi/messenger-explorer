@@ -7,7 +7,15 @@ type themeOptions = {
 
 const baseStyle = () => {
   return css`
-    margin: 20px;
+    margin: auto;
+    height: 90vh;
+    width: 95vw;
+    overflow: scroll;
+
+    .message-group {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
   `;
 };
 

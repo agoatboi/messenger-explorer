@@ -21,7 +21,11 @@ type MessageProps = {
 function Message({ useTheme, message }: MessageProps) {
   switch (message.messageType) {
     case 'text':
-      return <StyledMessage useTheme={useTheme}>{message.content}</StyledMessage>;
+      return (
+        <StyledMessage className="message" useTheme={useTheme}>
+          {message.content}
+        </StyledMessage>
+      );
     case 'photo':
       return (
         <StyledMessage useTheme={useTheme}>
@@ -31,7 +35,7 @@ function Message({ useTheme, message }: MessageProps) {
         </StyledMessage>
       );
     default:
-      return <div />;
+      return <p />;
   }
 
   // return <StyledMessage useTheme={useTheme}>
