@@ -8,31 +8,26 @@ type themeOptions = {
 const baseStyle = () => {
   return css`
     padding: 5px;
-    height: 85vh;
-    overflow: scroll;
-
-    .message-group {
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
+    text-align: center;
+    background: #cccccc;
   `;
 };
 
-const ThreadTheme: themeOptions = {
+const ThreadEntryTheme: themeOptions = {
   DEFAULT: css``,
 };
 
-type ThreadProps = {
+type ThreadEntryProps = {
   useTheme: string;
 };
 
-const getAllStyle = ({ useTheme }: ThreadProps) => {
+const getAllStyle = ({ useTheme }: ThreadEntryProps) => {
   return css`
     ${baseStyle()}
-    ${ThreadTheme[useTheme]}
+    ${ThreadEntryTheme[useTheme]}
   `;
 };
 
-export const StyledThread = styled.div<ThreadProps>`
+export const StyledThreadEntry = styled.div<ThreadEntryProps>`
   ${getAllStyle}
 `;

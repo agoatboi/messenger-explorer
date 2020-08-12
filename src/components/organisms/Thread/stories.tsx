@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, withKnobs, text } from '@storybook/addon-knobs';
 
+import { TextMessage } from '@src/interfaces/MessageInterfaces';
+import { time } from 'console';
 import Thread, { ThreadTheme } from '.';
 
 const stories = storiesOf('components|Organisms/Thread', module);
@@ -15,16 +17,21 @@ const defaultThread = () => {
   const participants = serializedParticipants.split(', ').map((participant) => ({
     name: participant,
   }));
-  const thread_path = text('thread_path', 'myThread');
-  const thread_type = select('thread_type', ['RegularGroup'], 'RegularGroup');
+  const serializedMessages = text('serialized messages', 'participant A, participant B');
+  const messages: Array<TextMessage> = serializedMessages.split('\n').map((messageText, i) => ({
+    content: messageText,
+    timestamp_ms: new Date().getTime() + 1500 * i,
+    sender_name: participants[i].name,
+    messageType: 'text',
+    type: 'Generic',
+  }));
+  const threadPath = text('threadPath', 'myThread');
+  const threadType = select('threadType', ['RegularGroup'], 'RegularGroup');
 
   return (
     <Thread
       useTheme={themeList}
-      participants={participants}
-      title={title}
-      thread_path={thread_path}
-      thread_type={thread_type}
+      thread={{ threadPath, threadType, participants, title, messages }}
     />
   );
 };

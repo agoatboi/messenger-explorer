@@ -9,6 +9,8 @@ import BackupDropper from '@src/components/atoms/BackupDropper';
 import Header from '@src/components/molecules/Header';
 import Button from '@src/components/atoms/Button';
 import SettingsSVGIcon from '@src/resources/icons/settings-24px.svg';
+import ThreadList from '@src/components/molecules/ThreadList';
+import { IThread } from '@src/interfaces/ThreadInterfaces';
 
 function groupMessages(arr: IMessage[][], el: IMessage) {
   let newArr = arr;
@@ -30,32 +32,24 @@ function groupMessages(arr: IMessage[][], el: IMessage) {
   return newArr;
 }
 
-// threadObj = undefined;
 function Main(): JSX.Element {
-  const [threadObj, setThreadObj] = useState({
-    empty: true,
-    thread_path: '',
-    thread_type: '',
-    participants: [],
-    title: '',
-    messages: [],
-  });
+  const [thread, setThread] = useState<IThread>();
+  const [threadList, setThreadList] = useState<Array<IThread>>([]);
   return (
     <div>
       <Header
-        title={threadObj.empty ? '' : threadObj.title}
+        title={thread ? thread.title : ''}
         buttons={[<Button text="" key={uid(SettingsSVGIcon)} icon={SettingsSVGIcon} />]}
       />
-      {threadObj.empty && (
-        <BackupDropper message="Drop your Conversation .json file here" onLoaded={setThreadObj} />
-      )}
-      {!threadObj.empty && (
-        <Thread
-          thread_path={threadObj.thread_path}
-          thread_type={threadObj.thread_type}
-          participants={threadObj.participants}
-        >
-          {threadObj.messages
+      <ThreadList threads={threadList} selectThread={setThread}>
+        <BackupDropper
+          message="Drop your Conversation .json file here"
+          onLoaded={(newThread: IThread) => setThreadList([...threadList, newThread])}
+        />
+      </ThreadList>
+      {thread && (
+        <Thread thread={thread}>
+          {thread.messages
             .reduce(groupMessages, [])
             .reverse()
             .map((messageGroup: IMessage[]) => {

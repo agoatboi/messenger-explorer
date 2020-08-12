@@ -2,6 +2,7 @@ import React from 'react';
 import MessageGroup from '@src/components/molecules/MessageGroup';
 import Title from '@src/components/atoms/Title';
 import { uid } from 'react-uid';
+import { IThread } from '@src/interfaces/ThreadInterfaces';
 import { StyledThread } from './styled';
 
 type objectOptions = {
@@ -12,31 +13,25 @@ export const ThreadTheme: objectOptions = {
   DEFAULT: 'DEFAULT',
 };
 
-interface Thread {
-  /** Array of participants, objects with name */
-  participants: Array<{ name: string }>;
-  /** Conversation name */
-  title: string;
-  /** Type of thread */
-  thread_type: string;
-  /** Local path to thread files */
-  thread_path: string;
-}
-
-interface ThreadProps extends Thread {
+interface ThreadProps {
   useTheme: string;
   children: React.ReactNode;
+  thread: IThread;
 }
 
-function Thread({ useTheme, children, participants, title }: ThreadProps): JSX.Element {
+function Thread({ useTheme, children, thread, ...rest }: ThreadProps): JSX.Element {
   return (
     <StyledThread useTheme={useTheme}>
-      <h3>List of Participants:</h3>
-      <ul>
-        {participants.map((participant) => (
-          <li key={uid(participant)}>{participant.name}</li>
-        ))}
-      </ul>
+      {thread.participants && (
+        <>
+          <h3>List of Participants:</h3>
+          <ul>
+            {thread.participants.map((participant) => (
+              <li key={uid(participant)}>{participant.name}</li>
+            ))}
+          </ul>
+        </>
+      )}
       {children}
     </StyledThread>
   );
